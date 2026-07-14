@@ -1,0 +1,71 @@
+CREATE TABLE Students (
+    StudentID INT,
+    Name VARCHAR(30),
+    Age INT
+);
+
+CREATE TABLE Courses (
+    CourseID INT,
+    CourseName VARCHAR(30)
+);
+
+CREATE TABLE Enrollments (
+    EnrollmentID INT,
+    StudentID INT,
+    CourseID INT,
+    Grade VARCHAR(5)
+);
+
+INSERT INTO Students VALUES
+(1,'Alice',20),
+(2,'Bob',22),
+(3,'Charlie',21),
+(4,'David',19);
+
+INSERT INTO Courses VALUES
+(1,'Math'),
+(2,'English'),
+(3,'History');
+
+INSERT INTO Enrollments VALUES
+(1,1,1,'A'),
+(2,1,2,'B'),
+(3,2,1,'A-'),
+(4,3,3,'B+'),
+(5,3,2,'A');
+
+SELECT Students.StudentID,
+Students.Name,
+Students.Age,
+Courses.CourseID,
+Courses.CourseName,
+Enrollments.Grade
+FROM Students
+INNER JOIN Enrollments
+ON Students.StudentID = Enrollments.StudentID
+INNER JOIN Courses
+ON Enrollments.CourseID = Courses.CourseID;
+
+SELECT Students.StudentID,
+Students.Name,
+Students.Age,
+Courses.CourseID,
+Courses.CourseName,
+Enrollments.Grade
+FROM Students
+LEFT JOIN Enrollments
+ON Students.StudentID = Enrollments.StudentID
+LEFT JOIN Courses
+ON Enrollments.CourseID = Courses.CourseID;
+
+SELECT Students.StudentID,
+Students.Name,
+Students.Age,
+Courses.CourseID,
+Courses.CourseName,
+Enrollments.Grade
+FROM Courses
+RIGHT JOIN Enrollments
+ON Courses.CourseID = Enrollments.CourseID
+RIGHT JOIN Students
+ON Enrollments.StudentID = Students.StudentID;
